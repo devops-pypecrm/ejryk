@@ -13,9 +13,9 @@ export default function Logo({ bare = false }: { bare?: boolean }) {
   const inner = (
     <>
       <span className="nx-logo-mark"><BoltIcon /></span>
-      <span className="nx-logo-text">{SITE.name}</span>
+      <span className="nx-logo-text">{SITE.name}<small>tech solutions</small></span>
     </>
   );
   if (bare) return <span className="nx-logo">{inner}</span>;
-  return <Link href="/" className="nx-logo" aria-label={SITE.name}>{inner}</Link>;
+  return <Link href="/" className="nx-logo" aria-label={SITE.legal}>{inner}</Link>;
 }

@@ -3,7 +3,7 @@ import PageHero from "../components/PageHero";
 import ContactForm from "../components/ContactForm";
 import { SITE } from "../../data/site";
 
-export const metadata: Metadata = { title: "Contact", description: `Talk to ${SITE.name}: call, WhatsApp, email or visit us in Kochi.` };
+export const metadata: Metadata = { title: "Contact", description: `Talk to ${SITE.legal}: call, WhatsApp, email or visit us in Kochi.` };
 
 const Icon = ({ d }: { d: React.ReactNode }) => (
   <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.4" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">{d}</svg>

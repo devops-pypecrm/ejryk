@@ -10,7 +10,7 @@ import WhatsAppButton from "./components/WhatsAppButton";
 import { SITE } from "../data/site";
 
 export const metadata: Metadata = {
-  title: { default: `${SITE.name} | ${SITE.tagline}`, template: `%s | ${SITE.name}` },
+  title: { default: `${SITE.legal} | ${SITE.tagline}`, template: `%s | ${SITE.legal}` },
   description: SITE.description,
 };
 

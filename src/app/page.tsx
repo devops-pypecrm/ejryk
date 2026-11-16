@@ -4,29 +4,29 @@ import { CATEGORIES } from "../data/services";
 import { WORK } from "../data/work";
 import { POSTS } from "../data/blog";
 import { WorkGrid, BlogList, Process, FaqSection, CtaBand } from "./components/Sections";
-import Storm from "./components/Storm";
+import SpeedSection from "./components/SpeedSection";
 import Marquee from "./components/Marquee";
 
 export default function Home() {
   return (
     <>
       <section>
-        <div id="home" className="hero">
-          <Storm />
-          <div className="hero-text-and-image">
-            <img className="herro-image" data-hero src="/maze/p/hero.jpg" alt="A laptop glowing in a dark room" width={802} height={530} fetchPriority="high" />
-            <h1 className="hero-big-text" data-hero>{SITE.name}</h1>
-          </div>
-          <div className="hero-small-text" data-hero>
-            Thunder-fast IT consulting and software development.<br />
-            Strategy, design, engineering and growth, under one roof.
-          </div>
-          <div className="nx-hero-cta" data-hero>
-            <Link href="/contact" className="nx-btn is-light">Book a consultation</Link>
-            <Link href="/services" className="nx-btn is-ghost">Explore services</Link>
+        <div id="home" className="nx-hero2">
+          <div className="w-layout-blockcontainer main-container w-container">
+            <p className="nx-hero2-chip" data-hero><span className="dot" />Zenitzu Tech Solutions · Kochi, India</p>
+            <h1 className="nx-hero2-title" data-hero>Your idea, <span className="nx-mark">live</span> in days. Not months.</h1>
+            <p className="nx-hero2-desc" data-hero>We plan, design, build and grow websites, apps and software for ambitious businesses, all under one roof.</p>
+            <div className="nx-hero-cta nx-hero2-cta" data-hero>
+              <Link href="/contact" className="nx-btn">Book a consultation</Link>
+              <Link href="#on-the-clock" className="nx-btn is-outline">See how fast</Link>
+            </div>
           </div>
         </div>
       </section>
+
+      <div id="on-the-clock"><SpeedSection /></div>
+
+      <Process />
 
       <section>
         <div className="work">
@@ -63,8 +63,6 @@ export default function Home() {
           </div>
         </div>
       </section>
-
-      <Process />
 
       <section>
         <div className="blog">

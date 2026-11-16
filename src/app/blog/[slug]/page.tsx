@@ -32,7 +32,7 @@ export default async function PostPage({ params }: { params: Promise<{ slug: str
           <h1>{p.title}</h1>
           <div className="post-body">{p.body.map((t, i) => <p key={i}>{t}</p>)}</div>
           <div className="author-bio">
-            <h4 className="author-bio-title">Written by the {SITE.name} team</h4>
+            <h4 className="author-bio-title">Written by the {SITE.legal} team</h4>
             <p className="author-bio-text">{author.name} and the team share what they learn building products for clients. <Link href="/contact" style={{ textDecoration: "underline" }}>Talk to us</Link> about yours.</p>
           </div>
           <div className="nx-next" style={{ marginTop: 50 }}>

@@ -4,12 +4,12 @@ import Tabs from "../components/Tabs";
 import { CtaBand } from "../components/Sections";
 import { SITE, STATS, TEAM, TESTIMONIALS, CLIENTS } from "../../data/site";
 
-export const metadata: Metadata = { title: "About", description: `${SITE.name} is an IT consulting and software development company based in Kochi, Kerala.` };
+export const metadata: Metadata = { title: "About", description: `${SITE.legal} is an IT consulting and software development company based in Kochi, Kerala.` };
 
 export default function AboutPage() {
   return (
     <>
-      <PageHero title="about" sub={`${SITE.name} is an IT consulting and software development company based in Kochi, Kerala.`} />
+      <PageHero title="about" sub={`${SITE.legal} is an IT consulting and software development company based in Kochi, Kerala.`} />
       <section>
         <div className="about-section">
           <div className="mission-stack">
@@ -29,7 +29,7 @@ export default function AboutPage() {
           <img className="team-image" src="/maze/p/about-team.jpg" alt="The team working around a table" width={1200} height={800} loading="lazy" data-reveal />
           <h2 className="team-title" data-reveal>Company overview</h2>
           <p className="team-paragraph" data-reveal>
-            {SITE.name} is a software and IT consulting company based in Edappally, Kochi. For the past two years we have helped start-ups and growing businesses decide what to build, design it well, engineer it properly and then keep it growing.
+            {SITE.legal} is a software and IT consulting company based in Edappally, Kochi. For the past two years we have helped start-ups and growing businesses decide what to build, design it well, engineer it properly and then keep it growing.
             <br /><br />
             Strategy, design, development and marketing sit in one team, so the people who shape your brand are in the same room as the people who ship your product. That means fewer hand-offs, faster decisions and results you can measure.
           </p>

@@ -43,7 +43,7 @@ export default function Footer() {
         </div>
         <div className="w-layout-blockcontainer main-container w-container" style={{ marginTop: 70 }}>
           <div className="copyright">
-            <div className="copyright-text">{SITE.name} - {SITE.tagline}: © {new Date().getFullYear()}</div>
+            <div className="copyright-text">{SITE.legal} - {SITE.tagline}: © {new Date().getFullYear()}</div>
             <a href="#top" className="back-to-top w-inline-block" aria-label="Back to top"><img src="/maze/backtop.png" alt="" className="back-to-top-image" /></a>
           </div>
         </div>

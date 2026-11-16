@@ -46,7 +46,7 @@ export default function MazeFx() {
     const ctx = gsap.context(() => {
       const big = document.querySelector<HTMLElement>(".hero-big-text[data-hero]");
       const img = document.querySelector<HTMLElement>(".herro-image[data-hero]");
-      const small = Array.from(document.querySelectorAll<HTMLElement>(".hero-small-text[data-hero], .nx-hero-cta[data-hero], .nx-hero-sub[data-hero]"));
+      const small = Array.from(document.querySelectorAll<HTMLElement>(".hero-small-text[data-hero], .nx-hero-cta[data-hero], .nx-hero-sub[data-hero], .nx-hero2 [data-hero]"));
       const title = document.querySelector<HTMLElement>(".sitemap-title[data-hero]");
       const tl = gsap.timeline({ defaults: { ease: "power3.out" } });
       if (big) tl.fromTo(big, { opacity: 0, filter: "blur(28px)", letterSpacing: "0.07em", y: 30 }, { opacity: 1, filter: "blur(0px)", letterSpacing: "-0.02em", y: 0, duration: 1.7 }, 0);

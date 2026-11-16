@@ -1,9 +1,10 @@
 // One place to rename the company / change contact details.
 export const SITE = {
   name: 'Zenitzu',
+  legal: 'Zenitzu Tech Solutions',
   tagline: 'IT Consulting & Software Development',
   description:
-    'Zenitzu is an IT consulting and software development company that moves at the speed of lightning. We advise on technology, design and engineer the product, and keep it growing, all under one roof.',
+    'Zenitzu Tech Solutions is an IT consulting and software development company that moves at the speed of lightning. We advise on technology, design and engineer the product, and keep it growing, all under one roof.',
   email: 'hello@zenitzu.com',
   phone: '+91 73030 95465',
   phoneHref: 'tel:+917303095465',
