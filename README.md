@@ -24,8 +24,10 @@ Login-protected team area: a leads inbox (filled by the contact form) and a task
 - Data lives in `.data/*.json` (or `DATA_DIR`). It needs a host with a persistent disk; on serverless hosting replace `src/lib/store.ts` with a database.
 
 ## Chatbots, marketing and automation (admin)
-- **Two separate chatbots**: Google Gemini (`GEMINI_API_KEY`) and xAI Grok (`XAI_API_KEY`). Each has its own key and its own conversation, on the public site widget and in `/admin/assistant`.
-- **Studio** (`/admin/studio`): blog, social, ads, SEO copy, outreach, proposal, case study and content ideas, on one bot or both side by side. Results can be saved to `zenitzu-ops/outputs/` or sent to the **Calendar**.
-- **Leads**: each enquiry creates a follow-up task and (optionally) a Telegram/Discord/webhook alert; draft replies with either bot, send by email or WhatsApp, export CSV.
+- **Claude** (`ANTHROPIC_API_KEY`) is the only AI: the site chat widget, the admin Claude assistant, the Studio, lead reply drafts and the automation workflows. Optional `CLAUDE_MODEL` (default `claude-opus-5-5`).
+- **Studio** (`/admin/studio`): blog, social, ads, SEO copy, outreach, proposal, case study and content ideas, written by Claude. Results can be saved to `zenitzu-ops/outputs/` or sent to the **Calendar**.
+- **Leads**: each enquiry creates a follow-up task and (optionally) a Telegram/Discord/webhook alert; draft replies with Claude, send by email or WhatsApp, export CSV.
 - **SEO & automation** (`/admin/tools`): page checker, UTM builder, status of GA4 / Clarity / alerts. `sitemap.xml` and `robots.txt` are generated.
 - All env vars are listed in `.env.example`.
+- **Automation** (`/admin/automation`): Lead autopilot (AI reply drafted into each new lead), stale-lead nudges, weekly content plan into the calendar, auto-drafts for upcoming content, and a weekly digest. They run on a built-in scheduler (needs a long-running Node server); on serverless hosts use `POST /api/cron` with `CRON_SECRET`. Outputs are drafts for review, nothing is sent to customers or published automatically.
+- **Post automation**: the Content calendar publishes to X, LinkedIn, Facebook Page, Telegram, Discord or a webhook (Zapier/Make/n8n for Instagram and others). Only items you set to **Scheduled** are posted (by the Auto-publisher workflow on their date, or with **Publish now**). Over-length text is refused, never cut; failures return to Draft with the reason. Credentials are listed in `.env.example`.

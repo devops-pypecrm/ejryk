@@ -4,11 +4,11 @@ import type { Lead, LeadStatus } from "../../../lib/store";
 
 const STATUSES: LeadStatus[] = ["new", "contacted", "won", "lost"];
 
-export default function LeadsClient({ initial, bots }: { initial: Lead[]; bots: { id: string; label: string }[] }) {
+export default function LeadsClient({ initial, ai: aiReady }: { initial: Lead[]; ai: boolean }) {
   const [rows, setRows] = useState(initial);
   const [filter, setFilter] = useState<LeadStatus | "all">("all");
   const [err, setErr] = useState("");
-  const [draft, setDraft] = useState<Record<string, { bot: string; text: string; busy: boolean }>>({});
+  const [draft, setDraft] = useState<Record<string, { text: string; busy: boolean }>>({});
 
   async function patch(id: string, body: object) {
     const r = await fetch(`/api/admin/leads/${id}`, { method: "PATCH", headers: { "Content-Type": "application/json" }, body: JSON.stringify(body) });
@@ -20,11 +20,11 @@ export default function LeadsClient({ initial, bots }: { initial: Lead[]; bots: 
     const r = await fetch(`/api/admin/leads/${id}`, { method: "DELETE" });
     if (r.ok) setRows((p) => p.filter((x) => x.id !== id)); else setErr("Could not delete.");
   }
-  async function ai(x: Lead, bot: string) {
-    setDraft((d) => ({ ...d, [x.id]: { bot, text: "", busy: true } }));
-    const r = await fetch(`/api/admin/leads/${x.id}/draft`, { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ provider: bot }) });
+  async function ai(x: Lead) {
+    setDraft((d) => ({ ...d, [x.id]: { text: "", busy: true } }));
+    const r = await fetch(`/api/admin/leads/${x.id}/draft`, { method: "POST", headers: { "Content-Type": "application/json" } });
     const d = await r.json().catch(() => ({}));
-    setDraft((m) => ({ ...m, [x.id]: { bot, text: r.ok ? d.draft : `⚠ ${d.error || "Failed"}`, busy: false } }));
+    setDraft((m) => ({ ...m, [x.id]: { text: r.ok ? d.draft : `⚠ ${d.error || "Failed"}`, busy: false } }));
   }
   const shown = rows.filter((x) => filter === "all" || x.status === filter);
 
@@ -48,7 +48,7 @@ export default function LeadsClient({ initial, bots }: { initial: Lead[]; bots: 
           <p className="adm-msg">{x.message}</p>
           <textarea key={x.notes} defaultValue={x.notes} placeholder="Private notes…" onBlur={(e) => e.target.value !== x.notes && patch(x.id, { notes: e.target.value })} />
           <div className="adm-ai">
-            {bots.map((b) => <button key={b.id} className="adm-btn ghost" disabled={draft[x.id]?.busy} onClick={() => ai(x, b.id)}>✨ Draft reply with {b.label.replace(/^(Google|xAI) /, "")}</button>)}
+            {aiReady && <button className="adm-btn ghost" disabled={draft[x.id]?.busy} onClick={() => ai(x)}>✨ Draft reply with Claude</button>}
             <button className="adm-btn ghost danger" onClick={() => del(x.id)}>Delete</button>
           </div>
           {draft[x.id] && (

@@ -1,6 +1,6 @@
 import { readText } from "./files";
 
-// Marketing Studio: each tool is a prompt recipe run on Gemini, Grok, or both side by side.
+// Marketing Studio: each tool is a prompt recipe run on Claude.
 export interface Tool { id: string; label: string; hint: string; folder: string; instruction: string }
 
 export const TOOLS: Tool[] = [

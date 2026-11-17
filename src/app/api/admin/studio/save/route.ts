@@ -10,8 +10,7 @@ export async function POST(req: NextRequest) {
   const tool = toolById(b.tool), content = str(b.content, 60000);
   if (!tool || !content) return json({ error: "Bad request" }, 400);
   const d = new Date(), pad = (n: number) => String(n).padStart(2, "0");
-  const by = b.by === "grok" ? "grok" : "gemini";
-  const name = `${d.toISOString().slice(0, 10)}-${tool.id}-${by}-${pad(d.getHours())}${pad(d.getMinutes())}${pad(d.getSeconds())}.md`;
+  const name = `${d.toISOString().slice(0, 10)}-${tool.id}-${pad(d.getHours())}${pad(d.getMinutes())}${pad(d.getSeconds())}.md`;
   const dir = `outputs/${tool.folder}`;
   try {
     await files.createFile(dir, name);

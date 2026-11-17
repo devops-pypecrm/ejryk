@@ -1,6 +1,7 @@
 import { NextRequest } from "next/server";
 import { leads, tasks } from "../../../lib/store";
 import { notify } from "../../../lib/notify";
+import { onNewLead } from "../../../lib/automation";
 import { clientIp, json, limited, str } from "../../../lib/http";
 
 // Public endpoint used by the contact form.
@@ -11,9 +12,10 @@ export async function POST(req: NextRequest) {
   if (str(b.website, 100)) return json({ ok: true }); // honeypot field: bots fill it, people never see it
   const name = str(b.name, 120), email = str(b.email, 200), phone = str(b.phone, 40), message = str(b.message, 4000);
   if (!name || !message || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) return json({ error: "Please fill in your name, a valid email and a message." }, 400);
-  await leads.add({ name, email, phone, message });
+  const lead = await leads.add({ name, email, phone, message });
   // Automation: follow-up task + instant alert (Telegram/Discord/webhook if configured). Never blocks the visitor.
   await tasks.add({ title: `Follow up: ${name}`, details: `${email}${phone ? " / " + phone : ""}\n\n${message.slice(0, 500)}`, priority: "high", assignee: "" }).catch(() => undefined);
   await notify(`New lead: ${name}\n${email}${phone ? "\n" + phone : ""}\n\n${message.slice(0, 600)}`).catch(() => undefined);
+  void onNewLead(lead); // automation workflows run in the background; the visitor is not kept waiting
   return json({ ok: true }, 201);
 }

@@ -13,7 +13,7 @@ export type Priority = "high" | "medium" | "low";
 export interface Task { id: string; createdAt: string; title: string; details: string; priority: Priority; status: TaskStatus; assignee: string; output: string }
 
 export type PlanStatus = "idea" | "draft" | "scheduled" | "posted";
-export interface Plan { id: string; createdAt: string; date: string; channel: string; title: string; body: string; status: PlanStatus }
+export interface Plan { id: string; createdAt: string; date: string; channel: string; title: string; body: string; status: PlanStatus; postedAt?: string; result?: string }
 
 const file = (name: string) => path.join(DIR, `${name}.json`);
 let chain: Promise<unknown> = Promise.resolve();
@@ -63,8 +63,27 @@ export const plans = {
   list: async () => (await read<Plan>("plans")).sort((a, b) => a.date.localeCompare(b.date)),
   add: (p: Pick<Plan, "date" | "channel" | "title" | "body">) =>
     mutate<Plan, Plan>("plans", (rows) => { const row: Plan = { ...p, id: newId(), createdAt: new Date().toISOString(), status: "idea" }; rows.push(row); return row; }),
-  update: (id: string, patch: Partial<Pick<Plan, "date" | "channel" | "title" | "body" | "status">>) =>
+  update: (id: string, patch: Partial<Pick<Plan, "date" | "channel" | "title" | "body" | "status" | "postedAt" | "result">>) =>
     mutate<Plan, Plan | null>("plans", (rows) => { const r = rows.find((x) => x.id === id); if (!r) return null; Object.assign(r, patch); return r; }),
   remove: (id: string) =>
     mutate<Plan, boolean>("plans", (rows) => { const i = rows.findIndex((x) => x.id === id); if (i < 0) return false; rows.splice(i, 1); return true; }),
+};
+
+// Marketing automation: one state record per workflow preset, plus a capped run log.
+export interface WorkflowState { id: string; enabled: boolean; params: Record<string, string>; lastSlot?: string; lastRun?: string; lastOk?: boolean; lastMessage?: string }
+export interface RunLog { id: string; at: string; workflow: string; ok: boolean; message: string }
+
+export const workflows = {
+  list: () => read<WorkflowState>("workflows"),
+  upsert: (id: string, patch: Partial<Omit<WorkflowState, "id">>) =>
+    mutate<WorkflowState, WorkflowState>("workflows", (rows) => {
+      let r = rows.find((x) => x.id === id);
+      if (!r) { r = { id, enabled: false, params: {} }; rows.push(r); }
+      Object.assign(r, patch); return { ...r };
+    }),
+};
+export const runlog = {
+  list: async () => (await read<RunLog>("runlog")).sort((a, b) => b.at.localeCompare(a.at)),
+  add: (workflow: string, ok: boolean, message: string) =>
+    mutate<RunLog, void>("runlog", (rows) => { rows.push({ id: newId(), at: new Date().toISOString(), workflow, ok, message: message.slice(0, 600) }); if (rows.length > 100) rows.splice(0, rows.length - 100); }),
 };

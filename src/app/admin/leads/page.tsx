@@ -1,9 +1,9 @@
 import { requireAdmin } from "../../../lib/server-auth";
 import { leads } from "../../../lib/store";
-import { available } from "../../../lib/chat";
+import { configured } from "../../../lib/chat";
 import LeadsClient from "../_components/LeadsClient";
 
 export default async function LeadsPage() {
   await requireAdmin();
-  return (<><h1 className="adm-h">Leads</h1><LeadsClient initial={await leads.list()} bots={available().map(({ id, label }) => ({ id, label }))} /></>);
+  return (<><h1 className="adm-h">Leads</h1><LeadsClient initial={await leads.list()} ai={configured()} /></>);
 }
