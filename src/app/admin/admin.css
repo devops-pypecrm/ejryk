@@ -1,0 +1,60 @@
+.adm { --ink:#07041c; --line:#e6e3f2; --bg:#f6f5fb; --brand:#5a34d0; --yel:#f2c935; min-height: 100vh; background: var(--bg); color: var(--ink); font-family: var(--font, 'Plus Jakarta Sans', system-ui, sans-serif); font-size: 15px; }
+.adm * { box-sizing: border-box; }
+.adm-center { display: grid; place-items: center; padding: 24px; background: var(--ink); }
+.adm-bar { display: flex; align-items: center; gap: 28px; padding: 14px 28px; background: #fff; border-bottom: 1px solid var(--line); position: sticky; top: 0; z-index: 5; flex-wrap: wrap; }
+.adm-brand { font-weight: 700; text-decoration: none; color: var(--ink); display: flex; align-items: center; gap: 8px; }
+.adm-brand span { background: var(--ink); color: var(--yel); width: 28px; height: 28px; display: grid; place-items: center; font-size: 14px; }
+.adm-brand small { font-weight: 600; font-size: 10px; letter-spacing: .16em; text-transform: uppercase; color: #777; margin-left: 4px; }
+.adm-bar nav { display: flex; gap: 20px; flex: 1; }
+.adm-bar nav a { text-decoration: none; color: var(--ink); font-weight: 500; }
+.adm-bar nav a:hover { color: var(--brand); }
+.adm-user { display: flex; align-items: center; gap: 12px; font-size: 13px; color: #666; }
+.adm-main { max-width: 1180px; margin: 0 auto; padding: 36px 24px 80px; }
+.adm-h { font-size: 32px; margin: 0 0 24px; font-weight: 700; letter-spacing: -.02em; }
+.adm-h2 { font-size: 18px; margin: 36px 0 14px; }
+.adm-card { background: #fff; border: 1px solid var(--line); border-radius: 14px; padding: 20px; margin-bottom: 14px; }
+.adm-grid4 { display: grid; grid-template-columns: repeat(auto-fit, minmax(190px, 1fr)); gap: 14px; }
+.adm-stat { text-decoration: none; color: inherit; display: flex; flex-direction: column; gap: 4px; margin: 0; transition: transform .2s, border-color .2s; }
+.adm-stat:hover { transform: translateY(-2px); border-color: var(--brand); }
+.adm-stat b { font-size: 44px; line-height: 1; letter-spacing: -.03em; }
+.adm-stat span { color: #666; }
+.adm-row { display: grid; grid-template-columns: 1fr 1.4fr auto; gap: 12px; align-items: center; padding: 12px 0; border-bottom: 1px solid var(--line); text-decoration: none; color: inherit; }
+.adm-row:last-child { border: 0; }
+.adm-empty { color: #888; margin: 6px 0; }
+.adm-btn { background: var(--ink); color: #fff; border: 1px solid var(--ink); padding: 10px 18px; border-radius: 999px; font: inherit; font-weight: 600; cursor: pointer; }
+.adm-btn:hover { background: var(--brand); border-color: var(--brand); }
+.adm-btn:disabled { opacity: .6; cursor: wait; }
+.adm-btn.ghost { background: transparent; color: var(--ink); border-color: var(--line); padding: 7px 14px; }
+.adm-btn.ghost:hover { border-color: var(--ink); background: #fff; }
+.adm-btn.danger:hover { color: #c0262d; border-color: #c0262d; }
+.adm-err { background: #fdecec; color: #a31b22; border: 1px solid #f4c4c6; padding: 10px 14px; border-radius: 10px; margin-bottom: 14px; }
+.pill { display: inline-block; padding: 3px 11px; border-radius: 999px; font-size: 12px; font-weight: 700; text-transform: capitalize; background: #eee; border: 0; font-family: inherit; }
+.pill.new, .pill.high { background: #ffe9a8; } .pill.contacted, .pill.medium { background: #e1d9ff; } .pill.won, .pill.low { background: #d6f3df; } .pill.lost { background: #eee; color: #777; }
+select.pill { cursor: pointer; padding: 6px 12px; }
+.adm-login { width: 100%; max-width: 400px; padding: 34px; display: flex; flex-direction: column; gap: 14px; margin: 0; }
+.adm-login h1 { margin: 0; font-size: 26px; } .adm-login p { margin: 0 0 6px; color: #666; }
+.adm-bolt { width: 44px; height: 44px; background: var(--ink); color: var(--yel); display: grid; place-items: center; font-size: 22px; }
+.adm label { display: flex; flex-direction: column; gap: 6px; font-weight: 600; font-size: 13px; }
+.adm input, .adm textarea, .adm select { font: inherit; padding: 10px 12px; border: 1px solid #d7d3e8; border-radius: 10px; background: #fff; color: var(--ink); width: 100%; }
+.adm input:focus, .adm textarea:focus, .adm select:focus { outline: 2px solid var(--brand); outline-offset: 1px; }
+.adm-tabs { display: flex; gap: 8px; margin-bottom: 18px; flex-wrap: wrap; }
+.adm-tabs button { border: 1px solid var(--line); background: #fff; padding: 7px 16px; border-radius: 999px; font: inherit; font-weight: 600; text-transform: capitalize; cursor: pointer; }
+.adm-tabs button.on { background: var(--ink); color: #fff; border-color: var(--ink); }
+.adm-tabs i { font-style: normal; opacity: .6; margin-left: 4px; }
+.adm-lead-top { display: flex; justify-content: space-between; align-items: center; gap: 12px; margin-bottom: 8px; }
+.adm-lead-top time { color: #888; font-size: 12px; margin-left: 8px; }
+.adm-lead-top select { width: auto; }
+.adm-contact { display: flex; gap: 16px; flex-wrap: wrap; margin-bottom: 10px; } .adm-contact a { color: var(--brand); font-weight: 600; }
+.adm-msg { white-space: pre-wrap; margin: 0 0 12px; line-height: 1.55; font-size: 15px; }
+.adm-lead textarea { min-height: 64px; margin-bottom: 10px; }
+.adm-newtask { display: grid; grid-template-columns: 2fr 1fr 130px; gap: 10px; align-items: start; }
+.adm-newtask textarea { grid-column: 1 / 3; min-height: 44px; } .adm-newtask .adm-btn { align-self: stretch; }
+.adm-board { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; align-items: start; }
+.adm-col { background: #ece9f7; border-radius: 14px; padding: 12px; min-height: 160px; }
+.adm-col h3 { margin: 4px 6px 12px; font-size: 14px; text-transform: uppercase; letter-spacing: .1em; } .adm-col h3 i { font-style: normal; opacity: .5; }
+.adm-task { background: #fff; border-radius: 10px; padding: 14px; margin-bottom: 10px; display: flex; flex-direction: column; gap: 8px; border: 1px solid var(--line); }
+.adm-task p { margin: 0; color: #555; font-size: 14px; white-space: pre-wrap; }
+.adm-task-top { display: flex; justify-content: space-between; align-items: center; } .adm-task-top small { color: #777; }
+.adm-task-act { display: flex; gap: 6px; flex-wrap: wrap; } .adm-task-act .adm-btn { padding: 5px 12px; font-size: 13px; }
+@media (max-width: 820px) { .adm-board { grid-template-columns: 1fr; } .adm-newtask { grid-template-columns: 1fr; } .adm-newtask textarea { grid-column: auto; } .adm-row { grid-template-columns: 1fr; gap: 2px; } .adm-bar { gap: 14px; padding: 12px 16px; } }
+.adm p { font-size: 15px; line-height: 1.5; }

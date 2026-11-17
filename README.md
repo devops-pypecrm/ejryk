@@ -14,3 +14,11 @@ bordered grids, pill marquees, accordion FAQ) in the brand palette: indigo / pur
 - Images: `public/maze` (photos in `public/maze/p`, stock photography). `scripts/maze-assets.cjs` rebuilds them.
 - The contact form opens the visitor's mail app (no backend yet).
 - Animations: scroll reveals + hero entrance in `src/app/components/MazeFx.tsx`; marquees are CSS. No cursor effects.
+
+## Private admin area (`/admin`)
+
+Login-protected team area: a leads inbox (filled by the contact form) and a task board.
+
+- Set `AUTH_SECRET`, `ADMIN_USER`, `ADMIN_PASSWORD` (see `.env.example`). Without them the login stays disabled.
+- Middleware blocks `/admin/*` and `/api/admin/*` without a valid signed, HttpOnly session cookie (12 h). Login is rate-limited and mutating calls are same-origin only.
+- Data lives in `.data/*.json` (or `DATA_DIR`). It needs a host with a persistent disk; on serverless hosting replace `src/lib/store.ts` with a database.

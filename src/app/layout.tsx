@@ -5,6 +5,7 @@ import "./styles/maze/style.css";
 import "./styles/maze-theme.css";
 import Header from "./components/Header";
 import Footer from "./components/Footer";
+import SiteChrome from "./components/SiteChrome";
 import MazeFx from "./components/MazeFx";
 import WhatsAppButton from "./components/WhatsAppButton";
 import { SITE } from "../data/site";
@@ -26,12 +27,12 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       </head>
       <body className="body" suppressHydrationWarning>
         <div id="top">
-          <Header />
+          <SiteChrome><Header /></SiteChrome>
           {children}
-          <Footer />
+          <SiteChrome><Footer /></SiteChrome>
         </div>
         <MazeFx />
-        <WhatsAppButton />
+        <SiteChrome><WhatsAppButton /></SiteChrome>
       </body>
     </html>
   );
