@@ -17,6 +17,7 @@ export default async function Overview() {
         {stat(t.filter((x) => x.status !== "done").length, "Open tasks", "/admin/tasks")}
         {stat(t.filter((x) => x.status === "done").length, "Done tasks", "/admin/tasks")}
       </div>
+      <Link href="/admin/files" className="adm-card adm-stat adm-wide"><b>📁</b><span>Workspace: brand context, templates, SOPs, skills, agents and outputs (zenitzu-ops)</span></Link>
       <h2 className="adm-h2">Latest leads</h2>
       <div className="adm-card">
         {l.slice(0, 5).map((x) => (

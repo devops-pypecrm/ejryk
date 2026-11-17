@@ -13,7 +13,7 @@ export default function MazeFx() {
   useEffect(() => {
     if (first.current) { first.current = false; return; }
     const el = flash.current;
-    if (!el || window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+    if (!el || path.startsWith("/admin") || window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
     el.classList.remove("go");
     void el.offsetWidth;
     el.classList.add("go");
