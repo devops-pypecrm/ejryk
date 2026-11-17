@@ -1,10 +1,10 @@
 import Link from "next/link";
 import { requireAdmin } from "../../lib/server-auth";
-import { leads, tasks } from "../../lib/store";
+import { leads, tasks, plans } from "../../lib/store";
 
 export default async function Overview() {
   await requireAdmin();
-  const [l, t] = await Promise.all([leads.list(), tasks.list()]);
+  const [l, t, pl] = await Promise.all([leads.list(), tasks.list(), plans.list()]);
   const stat = (n: number, label: string, href: string) => (
     <Link href={href} className="adm-card adm-stat"><b>{n}</b><span>{label}</span></Link>
   );
@@ -16,6 +16,12 @@ export default async function Overview() {
         {stat(l.length, "All leads", "/admin/leads")}
         {stat(t.filter((x) => x.status !== "done").length, "Open tasks", "/admin/tasks")}
         {stat(t.filter((x) => x.status === "done").length, "Done tasks", "/admin/tasks")}
+      </div>
+      <div className="adm-grid4" style={{ marginTop: 14 }}>
+        <Link href="/admin/studio" className="adm-card adm-stat"><b>✨</b><span>Marketing Studio: blogs, posts, ads, SEO copy</span></Link>
+        <Link href="/admin/calendar" className="adm-card adm-stat"><b>{pl.filter((x) => x.status !== "posted").length}</b><span>Content items planned</span></Link>
+        <Link href="/admin/assistant" className="adm-card adm-stat"><b>💬</b><span>Chatbots: Gemini and Grok</span></Link>
+        <Link href="/admin/tools" className="adm-card adm-stat"><b>🔎</b><span>SEO checker, UTM links, automation</span></Link>
       </div>
       <Link href="/admin/files" className="adm-card adm-stat adm-wide"><b>📁</b><span>Workspace: brand context, templates, SOPs, skills, agents and outputs (zenitzu-ops)</span></Link>
       <h2 className="adm-h2">Latest leads</h2>

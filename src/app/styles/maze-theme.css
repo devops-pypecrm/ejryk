@@ -558,3 +558,38 @@ a.footer-text:hover { text-decoration: underline; text-underline-offset: 4px; }
   .nx-time b { font-size: 76px; }
 }
 @media (prefers-reduced-motion: reduce) { .nx-mark { animation: none; background-size: 100% 100%; } .fx .nx-fill { transform: none; transition: none; } }
+
+/* ===== CHAT WIDGET ===== */
+.nx-chat-fab { position: fixed; right: 20px; bottom: 164px; z-index: 90; width: 56px; height: 56px; border-radius: 50%; border: 0; cursor: pointer; display: grid; place-items: center; background: #5a34d0; color: #fff; font-size: 30px; line-height: 1; box-shadow: 0 12px 30px -8px rgba(90,52,208,.7); transition: transform .25s; }
+.nx-chat-fab:hover { transform: scale(1.08); }
+.nx-chat-fab svg { width: 26px; height: 26px; }
+.nx-chat { position: fixed; right: 20px; bottom: 232px; z-index: 95; width: min(380px, calc(100vw - 40px)); height: min(540px, calc(100vh - 260px)); display: flex; flex-direction: column; background: #fff; border: 1px solid #e6e3f2; border-radius: 20px; box-shadow: 0 30px 70px -20px rgba(7,4,28,.4); overflow: hidden; animation: nx-chat-in .25s ease-out; }
+@keyframes nx-chat-in { from { opacity: 0; transform: translateY(12px) scale(.98); } }
+.nx-chat-head { display: flex; align-items: center; gap: 12px; padding: 14px 16px; background: #07041c; color: #fff; }
+.nx-chat-head > div { flex: 1; display: flex; flex-direction: column; line-height: 1.3; }
+.nx-chat-head small { font-size: 12px; opacity: .75; display: flex; align-items: center; gap: 6px; }
+.nx-chat-head small i { width: 7px; height: 7px; border-radius: 50%; background: #3ddc84; }
+.nx-chat-logo { width: 36px; height: 36px; border-radius: 10px; background: #f2c935; color: #07041c; display: grid; place-items: center; font-size: 18px; }
+.nx-chat-head button { background: none; border: 0; color: #fff; font-size: 24px; cursor: pointer; line-height: 1; }
+.nx-chat-tabs { display: flex; gap: 6px; padding: 10px 12px 0; background: #faf9ff; }
+.nx-chat-tabs button { flex: 1; display: flex; align-items: center; justify-content: center; gap: 7px; padding: 8px 10px; border: 1px solid #e6e3f2; border-bottom: 0; border-radius: 10px 10px 0 0; background: #f0eefa; font: inherit; font-size: 13px; font-weight: 600; cursor: pointer; color: #555; }
+.nx-chat-tabs button.on { background: #fff; color: #07041c; }
+.nx-chat-tabs i { width: 8px; height: 8px; border-radius: 50%; }
+.nx-chat-body { flex: 1; overflow-y: auto; padding: 14px; display: flex; flex-direction: column; gap: 8px; background: #fff; }
+.nx-chat-body p { margin: 0; padding: 10px 14px; border-radius: 16px; max-width: 88%; font-size: 14px; line-height: 1.55; white-space: pre-wrap; }
+.nx-chat-body .bot { background: #f3f1fb; align-self: flex-start; border-bottom-left-radius: 4px; }
+.nx-chat-body .bot a { color: #5a34d0; text-decoration: underline; }
+.nx-chat-body .me { background: #5a34d0; color: #fff; align-self: flex-end; border-bottom-right-radius: 4px; }
+.nx-chat-chips { display: flex; flex-direction: column; gap: 6px; align-items: flex-start; }
+.nx-chat-chips button { border: 1px solid #d9d3f5; background: #fff; border-radius: 999px; padding: 7px 14px; font: inherit; font-size: 13px; cursor: pointer; color: #5a34d0; }
+.nx-chat-chips button:hover { background: #f3f1fb; }
+.nx-chat-body .typing { display: flex; gap: 4px; }
+.nx-chat-body .typing span { width: 7px; height: 7px; border-radius: 50%; background: #9a8fd0; animation: nx-dot 1s infinite; }
+.nx-chat-body .typing span:nth-child(2) { animation-delay: .15s; } .nx-chat-body .typing span:nth-child(3) { animation-delay: .3s; }
+@keyframes nx-dot { 0%, 60%, 100% { opacity: .3; transform: none; } 30% { opacity: 1; transform: translateY(-3px); } }
+.nx-chat-form { display: flex; gap: 8px; padding: 10px 12px; border-top: 1px solid #e6e3f2; }
+.nx-chat-form input { flex: 1; min-width: 0; border: 1px solid #e6e3f2; border-radius: 999px; padding: 10px 16px; font: inherit; font-size: 14px; }
+.nx-chat-form input:focus { outline: 2px solid #5a34d0; outline-offset: 1px; }
+.nx-chat-form button { width: 40px; height: 40px; border: 0; border-radius: 50%; background: #f2c935; color: #07041c; font-size: 18px; font-weight: 800; cursor: pointer; }
+.nx-chat-form button:disabled { opacity: .45; cursor: default; }
+@media (prefers-reduced-motion: reduce) { .nx-chat { animation: none; } .nx-chat-body .typing span { animation: none; opacity: .6; } }

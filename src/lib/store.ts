@@ -12,6 +12,9 @@ export type TaskStatus = "todo" | "doing" | "done";
 export type Priority = "high" | "medium" | "low";
 export interface Task { id: string; createdAt: string; title: string; details: string; priority: Priority; status: TaskStatus; assignee: string; output: string }
 
+export type PlanStatus = "idea" | "draft" | "scheduled" | "posted";
+export interface Plan { id: string; createdAt: string; date: string; channel: string; title: string; body: string; status: PlanStatus }
+
 const file = (name: string) => path.join(DIR, `${name}.json`);
 let chain: Promise<unknown> = Promise.resolve();
 
@@ -54,4 +57,14 @@ export const tasks = {
     mutate<Task, Task | null>("tasks", (rows) => { const r = rows.find((x) => x.id === id); if (!r) return null; Object.assign(r, patch); return r; }),
   remove: (id: string) =>
     mutate<Task, boolean>("tasks", (rows) => { const i = rows.findIndex((x) => x.id === id); if (i < 0) return false; rows.splice(i, 1); return true; }),
+};
+
+export const plans = {
+  list: async () => (await read<Plan>("plans")).sort((a, b) => a.date.localeCompare(b.date)),
+  add: (p: Pick<Plan, "date" | "channel" | "title" | "body">) =>
+    mutate<Plan, Plan>("plans", (rows) => { const row: Plan = { ...p, id: newId(), createdAt: new Date().toISOString(), status: "idea" }; rows.push(row); return row; }),
+  update: (id: string, patch: Partial<Pick<Plan, "date" | "channel" | "title" | "body" | "status">>) =>
+    mutate<Plan, Plan | null>("plans", (rows) => { const r = rows.find((x) => x.id === id); if (!r) return null; Object.assign(r, patch); return r; }),
+  remove: (id: string) =>
+    mutate<Plan, boolean>("plans", (rows) => { const i = rows.findIndex((x) => x.id === id); if (i < 0) return false; rows.splice(i, 1); return true; }),
 };
