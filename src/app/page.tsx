@@ -7,10 +7,12 @@ import { WorkGrid, BlogList, Process, FaqSection, CtaBand } from "./components/S
 import SpeedSection from "./components/SpeedSection";
 import Marquee from "./components/Marquee";
 import HeroCurtains from "./components/HeroCurtains";
+import HomeIntro from "./components/HomeIntro";
 
 export default function Home() {
   return (
     <>
+      <HomeIntro />
       <section>
         <div id="home" className="nx-hero3">
           <HeroCurtains />
