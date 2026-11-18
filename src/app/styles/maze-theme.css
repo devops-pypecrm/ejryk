@@ -503,17 +503,8 @@ a.footer-text:hover { text-decoration: underline; text-underline-offset: 4px; }
 .nx-mark { background: linear-gradient(transparent 62%, var(--yellowish) 62% 92%, transparent 92%); background-repeat: no-repeat; background-size: 0% 100%; animation: nx-mark 1s cubic-bezier(.7,0,.2,1) .9s forwards; padding: 0 .06em; }
 @keyframes nx-mark { to { background-size: 100% 100%; } }
 
-/* hero: flat, no background art */
-.nx-hero2 { background: #fff; padding: 210px 0 110px; }
-.nx-hero2 .main-container { max-width: 1100px; }
-.nx-hero2-chip { display: inline-flex; align-items: center; gap: 10px; margin: 0 0 30px; padding: 9px 18px; border: 1px solid rgba(7,4,28,.18); border-radius: 50px; font-size: 13px; font-weight: 600; letter-spacing: .1em; text-transform: uppercase; }
-.nx-hero2-chip .dot { width: 8px; height: 8px; border-radius: 50%; background: var(--yellowish); box-shadow: 0 0 0 4px rgba(242,201,53,.3); }
-.nx-hero2-title { margin: 0; font-size: clamp(46px, 8vw, 118px); line-height: .98; font-weight: 600; letter-spacing: -0.04em; color: var(--black); }
-.nx-hero2-desc { max-width: 620px; margin: 34px 0 0; font-size: clamp(18px, 1.8vw, 23px); line-height: 1.5; color: rgba(7,4,28,.72); }
-.nx-hero2-cta { justify-content: flex-start; margin-top: 40px; }
 .nx-btn.is-outline { background: transparent; color: var(--black); border-color: var(--black); }
 .nx-btn.is-outline:hover { background: var(--black); color: #fff; }
-@media screen and (max-width: 991px) { .nx-hero2 { padding: 150px 0 80px; } }
 
 /* our work, on the clock */
 .nx-speedwrap { background: var(--black); color: #fff; padding: 120px 0 110px; position: relative; overflow: hidden; }
@@ -593,3 +584,40 @@ a.footer-text:hover { text-decoration: underline; text-underline-offset: 4px; }
 .nx-chat-form button { width: 40px; height: 40px; border: 0; border-radius: 50%; background: #f2c935; color: #07041c; font-size: 18px; font-weight: 800; cursor: pointer; }
 .nx-chat-form button:disabled { opacity: .45; cursor: default; }
 @media (prefers-reduced-motion: reduce) { .nx-chat { animation: none; } .nx-chat-body .typing span { animation: none; opacity: .6; } }
+
+
+/* ===== HERO v4: dark stage with glowing yellow curtains ===== */
+.nx-hero3 { position: relative; overflow: hidden; display: flex; align-items: center; justify-content: center; min-height: 100vh; padding: 170px 20px 110px; background: #030302; color: #fff; text-align: center; isolation: isolate; }
+.nx-hero3-inner { position: relative; z-index: 2; max-width: 980px; }
+.nx-hero3-title { margin: 0; font-size: clamp(40px, 7.2vw, 108px); line-height: 1.02; font-weight: 300; letter-spacing: -0.045em; color: #fff; }
+.nx-grad { background: linear-gradient(90deg, #7d7a22 0%, var(--yellowish) 75%, #fbf9a8 100%); -webkit-background-clip: text; background-clip: text; color: transparent; -webkit-text-fill-color: transparent; }
+.nx-hero3-desc { max-width: 640px; margin: 28px auto 0; font-size: clamp(17px, 1.7vw, 22px); line-height: 1.45; font-weight: 300; color: rgba(255,255,255,.62); }
+.nx-hero3-cta { justify-content: center; margin-top: 40px; }
+.nx-hero3 .nx-btn { background: var(--yellowish); color: #07041c; border-color: var(--yellowish); }
+.nx-hero3 .nx-btn:hover { background: #fff; border-color: #fff; color: #07041c; }
+.nx-hero3 .nx-btn.is-outline { background: transparent; color: #fff; border-color: rgba(255,255,255,.4); }
+.nx-hero3 .nx-btn.is-outline:hover { background: #fff; color: #07041c; border-color: #fff; }
+
+.nx-curtain { position: absolute; top: 0; bottom: 0; z-index: 1; width: clamp(80px, 17vw, 270px); display: flex; gap: 3px; pointer-events: none; }
+.nx-curtain.is-left { left: 0; -webkit-mask-image: linear-gradient(90deg, #000 35%, transparent); mask-image: linear-gradient(90deg, #000 35%, transparent); }
+.nx-curtain.is-right { right: 0; flex-direction: row-reverse; -webkit-mask-image: linear-gradient(270deg, #000 35%, transparent); mask-image: linear-gradient(270deg, #000 35%, transparent); }
+.nx-curtain i { flex-basis: 0; min-width: 2px; background: linear-gradient(90deg, #050504 0%, #6c6a16 22%, var(--yellowish) 52%, #fffdc2 62%, #3a3908 100%); opacity: .85; animation: nx-bar 6s ease-in-out infinite; animation-delay: calc(var(--i) * -.55s); }
+.nx-curtain::after { content: ""; position: absolute; inset: 0; background: linear-gradient(180deg, rgba(3,3,2,.55), transparent 22%, transparent 78%, rgba(3,3,2,.6)); }
+@keyframes nx-bar { 0%, 100% { opacity: .62; } 50% { opacity: 1; } }
+@media (prefers-reduced-motion: reduce) { .nx-curtain i { animation: none; } }
+@media screen and (max-width: 991px) { .nx-hero3 { padding: 140px 18px 80px; min-height: 92vh; } }
+
+/* header sits on the dark hero on the home page only */
+@media screen and (min-width: 992px) {
+  body:has(.nx-hero3) .navbar { background: transparent; background-image: none; box-shadow: none; }
+  body:has(.nx-hero3) .navbar .nx-logo, body:has(.nx-hero3) .navbar .menu-item { color: #fff; }
+  body:has(.nx-hero3) .navbar .nx-logo-mark { background: var(--yellowish); color: #07041c; }
+  body:has(.nx-hero3) .navbar .menu-item:hover, body:has(.nx-hero3) .navbar .menu-item.w--current { background-image: none; color: var(--yellowish); }
+  body:has(.nx-hero3) .nx-mega .menu-item, body:has(.nx-hero3) .nx-mega a { color: #000; }
+  body:has(.nx-hero3) .nx-mega .nx-mega-foot .nx-pill { color: #fff; }
+}
+@media screen and (max-width: 991px) {
+  body:has(.nx-hero3) .navbar { background: transparent; background-image: none; box-shadow: none; }
+  body:has(.nx-hero3) .navbar .nx-logo { color: #fff; }
+  body:has(.nx-hero3) .navbar .nx-logo-mark { background: var(--yellowish); color: #07041c; }
+}

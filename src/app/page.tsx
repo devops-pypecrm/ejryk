@@ -6,17 +6,18 @@ import { POSTS } from "../data/blog";
 import { WorkGrid, BlogList, Process, FaqSection, CtaBand } from "./components/Sections";
 import SpeedSection from "./components/SpeedSection";
 import Marquee from "./components/Marquee";
+import HeroCurtains from "./components/HeroCurtains";
 
 export default function Home() {
   return (
     <>
       <section>
-        <div id="home" className="nx-hero2">
-          <div className="w-layout-blockcontainer main-container w-container">
-            <p className="nx-hero2-chip" data-hero><span className="dot" />Zenitzu Tech Solutions · Kochi, India</p>
-            <h1 className="nx-hero2-title" data-hero>Your idea, <span className="nx-mark">live</span> in days. Not months.</h1>
-            <p className="nx-hero2-desc" data-hero>We plan, design, build and grow websites, apps and software for ambitious businesses, all under one roof.</p>
-            <div className="nx-hero-cta nx-hero2-cta" data-hero>
+        <div id="home" className="nx-hero3">
+          <HeroCurtains />
+          <div className="nx-hero3-inner">
+            <h1 className="nx-hero3-title" data-hero><span className="nx-grad">Your idea, live in days.</span><br />Not months.</h1>
+            <p className="nx-hero3-desc" data-hero>We plan, design, build and grow websites, apps and software for ambitious businesses, all under one roof.</p>
+            <div className="nx-hero-cta nx-hero3-cta" data-hero>
               <Link href="/contact" className="nx-btn">Book a consultation</Link>
               <Link href="#on-the-clock" className="nx-btn is-outline">See how fast</Link>
             </div>
